@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Animal Gifs</title>
+</head>
+<body>
+    <div id="buttons-view"></div>
+    <div id="gif-container"></div>
+
+    <script type="text/javascript">
+
+        var animals = ["owl", "bear", "snake", "alligator", "elephant", "panda", "koala", "horse", "duck"]
+
+        function showBtns() {
+            //$("#buttons-view").empty();
+
+            for (var i = 0; i < animals.length; i++) {
+                var newBtn = $("<button>");
+                newBtn.addClass("animal");
+                newBtn.attr("data-name", animals[i]);
+                newBtn.text(animals[i]);
+                $("#buttons-view").append(newBtn);
+            }
+        }
+
+        function displayAnimals() {
+
+            $("#gif-container").empty();
+            var animal = $(this).attr("data-name");
+            console.log(animal);
+            var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=xVqFIZb4wVbYYQNxHpV9ZwbspLesridR&q=" + animal + "&limit=10&lang=en";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                for (var i = 0; i <= response.data.length; i++) {
+                    var giphyURL = response.data[i].images.fixed_height.url;
+                    var newImg = $("<img>");
+                    newImg.attr("src", giphyURL);
+                    $("#gif-container").append(newImg);
+                };
+            });
+        };
+      
+
+        $(document).on("click", ".animal", displayAnimals);
+
+        showBtns();
+
+
+    </script>
+    
+</body>
+</html>
