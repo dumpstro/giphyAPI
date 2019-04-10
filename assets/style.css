@@ -1,0 +1,30 @@
+body {
+    background-color: green;
+}
+
+#gif-container {
+    display: block;
+    margin: 30px;
+    clear: right;
+}
+
+img {
+    float: left;
+    
+}
+
+.rating {
+    float:left;
+    margin: 5px;
+    clear;
+}
+
+button {
+    margin-left: 5px;
+}
+
+#animal-form {
+    float:right;
+    margin-right: 300px;
+    margin-bottom: 50px;
+}
